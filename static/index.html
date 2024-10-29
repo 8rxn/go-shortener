@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Aryan Vishwakarma - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Montserrat', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+        max-width: 100%;
+        margin: auto;
+        width: fit-content;
+
+    }
+
+    header {
+        color: black;
+        margin: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    header h1 {
+        font-size: 3em;
+    }
+
+    header p {
+        margin: 5px 0;
+        font-size: 1.2em;
+    }
+
+    header a {
+        color: gray;
+        text-decoration: underline;
+    }
+
+    .container {
+        padding: 10px 15px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+
+    h2 {
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .education,
+    .experience,
+    .projects,
+    .skills,
+    .achievements,
+    .leadership {
+        background-color: white;
+        padding: 20px;
+    }
+
+    .experience-item,
+    .project-item,
+    .achievement-item,
+    .leadership-item {
+        margin-bottom: 20px;
+    }
+
+    .experience-item h3,
+    .project-item h3,
+    .achievement-item h3,
+    .leadership-item h3 {
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .experience-item h4,
+    .project-item h4,
+    .leadership-item h4 {
+        margin-bottom: 10px;
+        color: #666;
+        font-weight: normal;
+    }
+
+    ul.skills-list {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    ul.skills-list li {
+        background-color: #e0e0e0;
+        margin: 5px;
+        padding: 10px 15px;
+        border-radius: 20px;
+    }
+
+    ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+
+    footer {
+        text-align: center;
+        color: white;
+    }
+</style>
+
+<body>
+    <header>
+        <div>
+
+            <h1>Raj Aryan Vishwakarma</h1>
+            <p>Ambikapur, India | <a href="mailto:hi@aryn.wtf">hi@aryn.wtf</a></p>
+        </div>
+        <p>
+            <a href="https://github.com/8rxn">/8rxn</a> |
+            <a href="https://linkedin.com/in/rajxryan">/rajxryan</a> |
+            <a href="https://aryn.wtf">aryn.wtf</a>
+        </p>
+    </header>
+    <div class="container">
+
+
+        <section class="experience">
+            <h2>Work Experience & Projects</h2>
+            <div class="experience-item">
+                <a href="https://workerai.co">
+                    <h3>Worker AI</h3>
+                </a>
+                <h4>Software Engineer Intern | May 2024 - Present</h4>
+                <ul>
+                    <li>Developed infrastructure with GCP Cloud Functions, Cloud Run, and Digital Ocean Droplets,
+                        optimizing costs.</li>
+                    <li>Created microservices architecture using Python and Node.js with comprehensive documentation.
+                    </li>
+                    <li>Designed email scheduling algorithms and implemented message queues with Cron.</li>
+                    <li>Built a log management dashboard using Grafana Loki and an analytics service for email events.
+                    </li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <a href="http://aksharpharmacy.com">
+                    <h3>Akshar Pharmacy</h3>
+                </a>
+                <h4>Website Development Lead - Freelance | May 2023 - July 2023</h4>
+                <ul>
+                    <li>Led a team of 2 to develop and optimize the official website.</li>
+                    <li>Increased organic search traffic through strategic website optimization.</li>
+                    <li>Enhanced user experience with responsive design, boosting mobile traffic and site performance.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="projects">
+            <h2>Projects</h2>
+            <div class="project-item">
+                <h3>Meme Explains</h3>
+                <h4>JavaScript, Node.js, AWS EC2, PostgreSQL, OpenAI API | April 2024</h4>
+                <ul>
+                    <li>Built an AI-driven meme application using GPT-4-turbo and DALLE3 for auto-generating memes.</li>
+                    <li>Deployed APIs on AWS EC2, managing meme generation, compression, and storage on S3.</li>
+                    <li>Implemented rate-limiting, credit-based usage, and prompt optimizations for enhanced UX.</li>
+                </ul>
+            </div>
+            <div class="project-item">
+                <h3>Infinite Meals</h3>
+                <h4>TypeScript, React, Next.js, MySQL, Redis | July 2023</h4>
+                <ul>
+                    <li>Developed a recipe-generating website using GPT-3.5-Turbo-1106 with advanced prompt engineering.
+                    </li>
+                    <li>Implemented caching and database optimizations, reducing load times by 40%.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="skills">
+            <h2>Technical Skills</h2>
+            <ul class="skills-list">
+                <li>JavaScript</li>
+                <li>Go</li>
+                <li>Bash</li>
+                <li>C++</li>
+                <li>Python</li>
+                <li>Lua</li>
+                <li>Linux</li>
+                <li>VS Code</li>
+                <li>Git & GitHub</li>
+                <li>Docker</li>
+                <li>Lighthouse</li>
+                <li>MySQL</li>
+                <li>PostgreSQL</li>
+                <li>MongoDB</li>
+                <li>Firebase Firestore</li>
+                <li>REST APIs</li>
+                <li>Node.js</li>
+                <li>React JS</li>
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>Express.js</li>
+                <li>FastAPI</li>
+                <li>Gin</li>
+                <li>AWS S3 & EC2</li>
+                <li>Flask</li>
+                <li>Grafana & Loki</li>
+            </ul>
+        </section>
+        <section class="achievements">
+            <h2>Achievements</h2>
+            <ul>
+                <li><strong>Arweave AO Prize</strong> at EthMumbai - March 2024</li>
+                <li><strong>Verbwire Prize Of Hack 36</strong> - 6.0 - March 2023</li>
+                <li><strong>Auth0 Prize Of HackNITR</strong> - 4.0 - January 2023</li>
+                <li><strong>Best Sustainability Hack</strong> at Hacky New Year By MLH - January 2023</li>
+            </ul>
+        </section>
+
+        <section class="leadership">
+            <h2>Leadership Roles</h2>
+            <div class="leadership-item">
+                <h3>President, Webwiz</h3>
+                <h4>May 2023 - Jun 2024</h4>
+                <ul>
+                    <li>Led the official Web Development Club of NIT Rourkela.</li>
+                    <li>Managed and built 6+ projects including Nitrutsav and Institute Counselling Services.</li>
+                </ul>
+            </div>
+            <div class="leadership-item">
+                <h3>Lead Organizer, HackOdisha 3.0</h3>
+                <h4>May 2023 - October 2023</h4>
+                <ul>
+                    <li>Organized HackOdisha 3.0 with over 3000 registrations and 140+ project submissions.</li>
+                    <li>Fostered a supportive community for participants.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <footer>
+        &copy; 2024 Raj Aryan Vishwakarma
+    </footer>
+</body>
+
+</html>
