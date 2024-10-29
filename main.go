@@ -7,13 +7,16 @@ import (
 	"io"
 	"net"
 	"net/http"
+	"strconv"
 	"strings"
+
+	"github.com/8rxn/go-shortener/routes"
 )
 
 const keyServerAddr = "serverAddr"
 
 func getRedirect(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+	// ctx := r.Context()
 
 	pas_path := strings.Split(r.URL.Path, "/")[1]
 
@@ -25,19 +28,39 @@ func getRedirect(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("%s: got / request. %s \n",
-		ctx.Value(keyServerAddr), pas_path,
-	)
+	url := routes.GetURL(pas_path)
+	http.Redirect(w, r, url, http.StatusMovedPermanently)
 }
-func getHello(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func setUrl(w http.ResponseWriter, r *http.Request) {
+	// ctx := r.Context()
 
-	fmt.Printf("%s: got /hello request\n", ctx.Value(keyServerAddr))
-	io.WriteString(w, "hello route!\n")
+	url := r.URL.Query().Get("url")
+	slug := r.URL.Query().Get("slug")
+	expiry := r.URL.Query().Get("expiry")
+
+	if expiry == "" {
+		expiry = "0"
+	}
+
+	expiry_time, err := strconv.Atoi(expiry)
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if url == "" || slug == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	set_slug := routes.SetShortenedURL(url, slug, int32(expiry_time))
+	io.WriteString(w, "hello route!\n url: "+url+"\n slug: "+set_slug)
 }
 
 func main() {
 	mux := http.NewServeMux()
+	mux.HandleFunc("/set", setUrl)
 	mux.HandleFunc("/*", getRedirect)
 
 	ctx := context.Background()
