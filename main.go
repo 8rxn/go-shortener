@@ -41,7 +41,7 @@ func getRedirect(w http.ResponseWriter, r *http.Request) {
 }
 
 func setUrl(w http.ResponseWriter, r *http.Request) {
-
+	enableCors(&w)
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -99,6 +99,7 @@ func setUrl(w http.ResponseWriter, r *http.Request) {
 }
 
 func getAll(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -116,6 +117,7 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteShort(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -152,6 +154,10 @@ func deleteShort(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"success": "true"})
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func main() {
