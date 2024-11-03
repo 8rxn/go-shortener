@@ -41,6 +41,12 @@ func getRedirect(w http.ResponseWriter, r *http.Request) {
 }
 
 func setUrl(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	// ctx := r.Context()
 	var body_json map[string]string
 	body, er := io.ReadAll(r.Body)
@@ -56,13 +62,13 @@ func setUrl(w http.ResponseWriter, r *http.Request) {
 	}
 
 	url, ok := body_json["url"]
-	if !ok {
+	if !ok || url == "" {
 		http.Error(w, "url not found in request", http.StatusBadRequest)
 		return
 	}
 
 	slug, ok := body_json["slug"]
-	if !ok {
+	if !ok || slug == "" {
 		http.Error(w, "slug not found in request", http.StatusBadRequest)
 		return
 	}
@@ -92,9 +98,67 @@ func setUrl(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
+func getAll(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	urls, err := routes.GetAllURLs()
+	if err != nil {
+		http.Error(w, "Error fetching urls", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(urls)
+}
+
+func deleteShort(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var body_json map[string]string
+	body, er := io.ReadAll(r.Body)
+
+	if er != nil {
+		http.Error(w, "Error reading body", http.StatusBadRequest)
+		return
+	}
+
+	if err := json.Unmarshal(body, &body_json); err != nil {
+		http.Error(w, "Error parsing request body", http.StatusBadRequest)
+		return
+	}
+
+	slug, ok := body_json["slug"]
+	if !ok || slug == "" {
+		http.Error(w, "slug not found in request", http.StatusBadRequest)
+		return
+	}
+
+	res, err := routes.DeleteSlug(slug)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	if !res {
+		http.Error(w, "slug not found", http.StatusBadRequest)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"success": "true"})
+}
+
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/set", setUrl)
+	mux.HandleFunc("/get-all", getAll)
+	mux.HandleFunc("/delete", deleteShort)
 	mux.HandleFunc("/*", getRedirect)
 
 	ctx := context.Background()
